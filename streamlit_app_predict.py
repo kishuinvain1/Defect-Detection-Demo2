@@ -32,7 +32,7 @@ def load_image():
 	
         
        
-    return img_array
+    #return img_array
        
 
 
