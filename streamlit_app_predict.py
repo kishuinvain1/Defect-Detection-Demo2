@@ -101,7 +101,7 @@ def main():
 	
 	
 	
-        results = predict(model, "main_image.jpg")
+        results = predict(model, svd_img)
 	
         #results = predict(model2, svd_img)
         print("Prediction Results are...")
