@@ -24,6 +24,7 @@ def load_image():
         image = Image.open(uploaded_file)
         img_array = np.array(image)
         cv2.imwrite('main_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR))
+    return image_array
 
         
        
@@ -106,7 +107,7 @@ def main():
         print("Prediction Results are...")
         st.write(results['predictions'][0]['class'])
 	
-     
+        """
 	
        
         if len(results['predictions']) == 0:
@@ -125,7 +126,7 @@ def main():
             
             drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
          
-              
+         """     
 
 if __name__ == '__main__':
     main()
