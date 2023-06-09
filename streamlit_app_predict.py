@@ -25,12 +25,12 @@ def load_image():
         img_array = np.array(image).astype(np.float32)
         
        
-        opencv_image = cv2.imdecode(img_array, 1)
+        #opencv_image = cv2.imdecode(img_array, 1)
         
 	
         #cv2.imwrite("main_image.jpg", opencv_image)
        
-    return opencv_image
+    return img_array
        
 
 
