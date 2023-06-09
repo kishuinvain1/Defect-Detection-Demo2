@@ -16,6 +16,7 @@ def load_image():
     opencv_image = None 
     path = None
     f = None
+    name = None
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
