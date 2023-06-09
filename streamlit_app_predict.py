@@ -24,7 +24,7 @@ def load_image():
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         img_array = np.array(image, dtype=np.float32)
-        cv2.imwrite('main_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB))
+        cv2.imwrite('main_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR))
     return img_array
 
         
