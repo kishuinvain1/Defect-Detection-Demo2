@@ -81,6 +81,8 @@ def main():
     
      
     image, svd_img = load_image()
+    print("saved images is...")
+    print(svd_img)
     
     #st.write('Enter the image URL')
     #url = st.text_input('URL', '')
