@@ -21,8 +21,8 @@ def load_image():
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
-	image = Image.open(uploaded_file)
-	img_array = np.array(image).astype(np.float32)
+        image = Image.open(uploaded_file)
+        img_array = np.array(image).astype(np.float32)
         
        
         opencv_image = cv2.imdecode(img_array, 1)
