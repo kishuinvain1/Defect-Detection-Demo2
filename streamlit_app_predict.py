@@ -60,9 +60,11 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
         color = (0,255,0)
     elif(cl == "tear"):
         color = (255,0,0)
+	
+    cl_cf = cl+""+cf	
     
     img = cv2.rectangle(img, start_pnt, end_pnt, color, 10)
-    img = cv2.putText(img, cl, txt_start_pnt, cv2.FONT_HERSHEY_SIMPLEX, 3, color, 10, cv2.LINE_AA)	
+    img = cv2.putText(img, cl_cf, txt_start_pnt, cv2.FONT_HERSHEY_SIMPLEX, 3, color, 10, cv2.LINE_AA)	
     st.image(img, caption='Resulting Image')	
     
 
