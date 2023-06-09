@@ -19,7 +19,7 @@ def load_image():
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
-        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype="float32")
+        file_bytes = np.asarray(bytearray(uploaded_file.read()))
         opencv_image = cv2.imdecode(file_bytes, 1)
         image_data = uploaded_file.getvalue() 
         #st.image(image_data)
