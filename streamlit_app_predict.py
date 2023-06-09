@@ -20,7 +20,7 @@ def load_image():
     print(uploaded_file)
     if uploaded_file is not None:
         file_bytes = np.asarray(bytearray(uploaded_file.read()))
-        opencv_image = cv2.imdecode(file_bytes, 1)
+        opencv_image = cv2.imdecode(file_bytes)
         image_data = uploaded_file.getvalue() 
         #st.image(image_data)
         name = uploaded_file.name
@@ -65,7 +65,7 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
 
 
 def predict(model, url):
-    return model.predict(url, confidence=40, overlap=30)
+    return model.predict(url, confidence=40, overlap=30).json()
     #return model.predict(url, hosted=True).json()
 	
 	
@@ -94,7 +94,7 @@ def main():
 	
 	
         results = predict(model, svd_img)
-        #results = predict(model2, url)
+        #results = predict(model2, "main_image.jpg")
         print("Prediction Results are...")	
         print(results)
         if len(results['predictions']) == 0:
