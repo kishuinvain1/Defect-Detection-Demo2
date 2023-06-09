@@ -19,7 +19,7 @@ def load_image():
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
-        file_bytes = np.asarray(bytearray(uploaded_file.read())).astype(np.float32)
+        file_bytes = np.asarray(bytearray(uploaded_file.read())).astype(np.uint8)
        
         opencv_image = cv2.imdecode(file_bytes, 1)
         image_data = uploaded_file.getvalue() 
@@ -29,7 +29,7 @@ def load_image():
         print("abs path")
         print(path)
 	
-        cv2.imwrite("main_image.jpg", opencv_image)
+        #cv2.imwrite("main_image.jpg", opencv_image)
        
     return path, opencv_image
        
@@ -94,7 +94,7 @@ def main():
 	
 	
 	
-        results = predict(model, "main_image.jpg")
+        results = predict(model, svd_img)
         #results = predict(model2, "main_image.jpg")
         print("Prediction Results are...")	
         print(results)
