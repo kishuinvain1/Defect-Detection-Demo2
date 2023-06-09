@@ -22,14 +22,15 @@ def load_image():
     print(uploaded_file)
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        img_array = np.array(image).astype(np.float16)
-        #img_array.save("main_image.jpg")
+        img_array = np.array(image).astype(np.float32)
+	data = im.fromarray(img_array)
+        data.save("main_image.jpg")
         
        
         #opencv_image = cv2.imdecode(img_array, 1)
         
 	
-        cv2.imwrite("main_image.jpg", img_array)
+        
        
     return img_array
        
