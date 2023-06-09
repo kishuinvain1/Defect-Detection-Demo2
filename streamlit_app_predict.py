@@ -72,11 +72,11 @@ def main():
     st.title('Defect Detection')
     option = st.selectbox('Image Type',('Normal', 'Zoomed-in'))
 	
-   
-    #Model api for fleet-crack trained on 25_03_23	
-    #rf = Roboflow(api_key="SNxIPCnRCYWXUM9lBAp4")
-    #project = rf.workspace().project("fleet-crack-2-wg5qy")
-    #model = project.version(1).model
+    #Model api for rubber part detection 2classes (Tear/Ok)
+    rf = Roboflow(api_key="96lGMEBVBOSTljKY64Rp")
+    project = rf.workspace().project("rubberpart-checking")
+    model = project.version(1).model
+    
      
     image, svd_img = load_image()
     zoomin_bias = st.number_input('Zoomin Bias')
@@ -87,10 +87,7 @@ def main():
         st.write('Calculating results...')
         
 	
-	#Model api for rubber part detection 2classes (Tear/Ok)
-        rf = Roboflow(api_key="96lGMEBVBOSTljKY64Rp")
-	project = rf.workspace().project("rubberpart-checking")
-	model = project.version(1).model
+	
 	
 	
 	
