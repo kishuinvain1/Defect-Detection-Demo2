@@ -21,19 +21,16 @@ def load_image():
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
-        file_bytes = np.asarray(bytearray(uploaded_file.read())).astype(np.uint8)
+	image = Image.open(uploaded_file)
+	img_array = np.array(image).astype(np.float32)
+        
        
-        opencv_image = cv2.imdecode(file_bytes, 1)
-        image_data = uploaded_file.getvalue() 
-        #st.image(image_data)
-        name = uploaded_file.name
-        path = os.path.abspath(name)
-        print("abs path")
-        print(path)
+        opencv_image = cv2.imdecode(img_array, 1)
+        
 	
         #cv2.imwrite("main_image.jpg", opencv_image)
        
-    return image_data, opencv_image
+    return opencv_image
        
 
 
@@ -75,7 +72,7 @@ def predict(model, url):
 	
 	
 def main():
-    st.title('Defect Detection')
+    st.title('Defect Detection V2')
     
 	
     #Model api for rubber part detection 2classes (Tear/Ok)
@@ -84,7 +81,7 @@ def main():
     model = project.version(1).model
     
      
-    image, svd_img = load_image()
+    svd_img = load_image()
     print("saved images is...")
     print(svd_img)
     
