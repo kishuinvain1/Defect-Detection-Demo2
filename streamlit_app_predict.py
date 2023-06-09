@@ -18,14 +18,12 @@ def load_image():
     f = None
     name = None
     image_data = None
-    img_array = None
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        img_array = np.array(image, dtype=np.uint8)
-        cv2.imwrite('main_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR))
-    return img_array
+        img_array = np.array(image)
+        cv2.imwrite('maing_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR))
 
         
        
@@ -34,7 +32,7 @@ def load_image():
 	
         
        
-   
+    return img_array
        
 
 
@@ -48,7 +46,7 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     
 
     img = cv2.imread("main_image.jpg")
-    img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    img = cv2.cvtColor(saved_image,cv2.COLOR_BGR2RGB)
     #img = saved_image.copy()
     x = int(x)
     y = int(y)
@@ -60,7 +58,6 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     if(cl == "ok"):
         color = (0,255,0)
     elif(cl == "tear"):
-        cl = "reject"
         color = (255,0,0)
 	
     #cl_cf = cl+""+str(cf)	
@@ -104,13 +101,12 @@ def main():
 	
         results = predict(model, "main_image.jpg")
 	
-        #results = predict(model2, svd_img)
-        print("Prediction Results are...")
+        #results = predict(model2, "main_image.jpg")
+        print("Prediction Results are...")	
         st.write(results['predictions'][0]['class'])
+        st.write(results['predictions'][0]['confidence'])
 	
-        
-	
-       
+        """
         if len(results['predictions']) == 0:
             st.image(svd_img)
             st.write("No object is detected")
@@ -126,8 +122,8 @@ def main():
             
             
             drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
-         
-           
+         """
+              
 
 if __name__ == '__main__':
     main()
