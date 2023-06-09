@@ -18,6 +18,7 @@ def load_image():
     f = None
     name = None
     image_data = None
+    img_array = None
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
@@ -32,7 +33,7 @@ def load_image():
 	
         
        
-    #return img_array
+    return img_array
        
 
 
