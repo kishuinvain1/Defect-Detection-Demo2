@@ -70,7 +70,7 @@ def predict(model, url):
 	
 def main():
     st.title('Defect Detection')
-    option = st.selectbox('Image Type',('Normal', 'Zoomed-in'))
+    
 	
     #Model api for rubber part detection 2classes (Tear/Ok)
     rf = Roboflow(api_key="96lGMEBVBOSTljKY64Rp")
@@ -79,7 +79,7 @@ def main():
     
      
     image, svd_img = load_image()
-    zoomin_bias = st.number_input('Zoomin Bias')
+    
     #st.write('Enter the image URL')
     #url = st.text_input('URL', '')
     result = st.button('Predict')
