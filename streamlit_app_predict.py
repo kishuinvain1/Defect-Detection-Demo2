@@ -23,6 +23,7 @@ def load_image():
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         img_array = np.array(image).astype(np.float32)
+	img_array.save("main_image.jpg")
         
        
         #opencv_image = cv2.imdecode(img_array, 1)
@@ -43,7 +44,7 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     #img = Image.open(saved_image)
     
 
-    #img = cv2.imread(saved_image)
+    img = cv2.imread("main_image.jpg")
     img = cv2.cvtColor(saved_image,cv2.COLOR_BGR2RGB)
     #img = saved_image.copy()
     x = int(x)
@@ -97,7 +98,7 @@ def main():
 	
 	
 	
-        results = predict(model, svd_img)
+        results = predict(model, "main_image.jpg")
         #results = predict(model2, "main_image.jpg")
         print("Prediction Results are...")	
         print(results)
