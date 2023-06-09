@@ -103,7 +103,7 @@ def main():
 	
         results = predict(model, "main_image.jpg")
 	
-        #results = predict(model2, "main_image.jpg")
+        #results = predict(model2, svd_img)
         print("Prediction Results are...")
         st.write(results['predictions'][0]['class'])
 	
