@@ -18,6 +18,7 @@ def load_image():
     f = None
     name = None
     image_data = None
+    img_array = None
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
@@ -107,7 +108,7 @@ def main():
         print("Prediction Results are...")
         st.write(results['predictions'][0]['class'])
 	
-        """
+        
 	
        
         if len(results['predictions']) == 0:
@@ -126,7 +127,7 @@ def main():
             
             drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
          
-         """     
+           
 
 if __name__ == '__main__':
     main()
