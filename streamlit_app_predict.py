@@ -31,7 +31,7 @@ def load_image():
 	
         #cv2.imwrite("main_image.jpg", opencv_image)
        
-    return path, opencv_image
+    return name, opencv_image
        
 
 
