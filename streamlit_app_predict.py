@@ -17,6 +17,7 @@ def load_image():
     path = None
     f = None
     name = None
+    image_data = None
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
