@@ -58,7 +58,8 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     txt_start_pnt = (x-w//2, y-h//2-15)
     if(cl == "ok"):
         color = (0,255,0)
-    elif(cl == "reject"):
+    elif(cl == "tear"):
+	cl = "reject"
         color = (255,0,0)
 	
     #cl_cf = cl+""+str(cf)	
