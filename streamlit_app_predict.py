@@ -23,8 +23,8 @@ def load_image():
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         img_array = np.array(image).astype(np.float32)
-        data = Image.fromarray(bytearray(img_array))
-        data.save("main_image.jpg")
+        #data = Image.fromarray(bytearray(img_array))
+        #data.save("main_image.jpg")
         
        
         #opencv_image = cv2.imdecode(img_array, 1)
@@ -99,10 +99,14 @@ def main():
 	
 	
 	
-        results = predict(model, "main_image.jpg")
+        results = predict(model, svd_img)
+	
         #results = predict(model2, "main_image.jpg")
         print("Prediction Results are...")	
-        print(results)
+        st.write(results['predictions'][0]['class'])
+	st.write(results['predictions'][0]['confidence'])
+	
+        """
         if len(results['predictions']) == 0:
             st.image(svd_img)
             st.write("No object is detected")
@@ -118,7 +122,7 @@ def main():
             
             
             drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
-         
+         """
               
 
 if __name__ == '__main__':
