@@ -23,11 +23,11 @@ def load_image():
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         img_array = np.array(image)
-        #data = Image.fromarray(bytearray(img_array))
-        #data.save("main_image.jpg")
+        cv2.imwrite('maing_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR))
+
         
        
-        #opencv_image = cv2.imdecode(img_array, 1)
+       
         
 	
         
@@ -99,7 +99,7 @@ def main():
 	
 	
 	
-        results = predict(model, svd_img)
+        results = predict(model, "main_image.jpg")
 	
         #results = predict(model2, "main_image.jpg")
         print("Prediction Results are...")	
