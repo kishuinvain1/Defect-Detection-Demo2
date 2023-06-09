@@ -105,7 +105,7 @@ def main():
 	
         #results = predict(model2, "main_image.jpg")
         print("Prediction Results are...")
-	st.write(results['predictions'][0]['class'])
+        st.write(results['predictions'][0]['class'])
 	
      
 	
