@@ -7,9 +7,14 @@ from PIL import Image
 import cv2
 import numpy as np
 import base64
+from ultralytics import YOLO
 
 
-
+@st.cache_resource(ttl=86400)
+def load_model():
+    model_pth = "./rubberpart-checking-colab-train/model-data=rf5.v2-yolov8x/best.pt"
+    model = YOLO(model_pth)
+    return model
 
 
 def load_image():
@@ -18,37 +23,26 @@ def load_image():
     f = None
     name = None
     image_data = None
-    img_array = None
     uploaded_file = st.file_uploader(label='Pick an image to test')
     print(uploaded_file)
     if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        img_array = np.array(image)
-        cv2.imwrite('maing_image.jpg', cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR))
-
-        
+        file_bytes = np.asarray(bytearray(uploaded_file.read())).astype(np.uint8)
        
-       
-        
+        opencv_image = cv2.imdecode(file_bytes, 1)
+        image_data = uploaded_file.getvalue() 
+        #st.image(image_data)
+        name = uploaded_file.name
+        path = os.path.abspath(name)
+        print("abs path")
+        print(path)
 	
-        
+        #cv2.imwrite("main_image.jpg", opencv_image)
        
-    return img_array
-       
-
-
-	
-
-
+    return image_data, opencv_image
 
 	
 def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
-    #img = Image.open(saved_image)
-    
-
-    img = cv2.imread("main_image.jpg")
     img = cv2.cvtColor(saved_image,cv2.COLOR_BGR2RGB)
-    #img = saved_image.copy()
     x = int(x)
     y = int(y)
     w = int(w)
@@ -67,8 +61,7 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     img = cv2.putText(img, cl, txt_start_pnt, cv2.FONT_HERSHEY_SIMPLEX, 3, color, 10, cv2.LINE_AA)	
     st.image(img, caption='Resulting Image')	
     
-
-
+	
 def predict(model, url):
     return model.predict(url, confidence=40, overlap=30).json()
     #return model.predict(url, hosted=True).json()
@@ -76,54 +69,27 @@ def predict(model, url):
 	
 def main():
     st.title('Defect Detection V2')
-    
-	
-    #Model api for rubber part detection 2classes (Tear/Ok)
-    rf = Roboflow(api_key="96lGMEBVBOSTljKY64Rp")
-    project = rf.workspace().project("rubberpart-checking")
-    model = project.version(1).model
-    
-     
-    svd_img = load_image()
-    print("saved images is...")
-    print(svd_img)
-    
-    #st.write('Enter the image URL')
-    #url = st.text_input('URL', '')
+    image, svd_img = load_image()
+    model = load_model()
     result = st.button('Predict')
     if(result):
         st.write('Calculating results...')
-        
-	
-	
-	
-	
-	
-	
-        results = predict(model, "main_image.jpg")
-	
-        #results = predict(model2, "main_image.jpg")
-        print("Prediction Results are...")	
-        st.write(results['predictions'][0]['class'])
-        st.write(results['predictions'][0]['confidence'])
-	
-        """
+        results = model("main_image.jpg", agnostic_nms=True)
         if len(results['predictions']) == 0:
             st.image(svd_img)
             st.write("No object is detected")
         else:
-		
-            new_img_pth = results['predictions'][0]['image_path']
-            x = results['predictions'][0]['x']
-            y = results['predictions'][0]['y']
-            w = results['predictions'][0]['width']
-            h = results['predictions'][0]['height']
-            cl = results['predictions'][0]['class']
-            cnf = results['predictions'][0]['confidence']
-            
-            
+            conf_lst = results[0].conf.tolist()
+            cls_lst = results[0].cls.tolist()
+            bb_lst = results[0].xywh.tolist()
+            x = bb_lst[0][0]
+            y = bb_lst[0][1]	
+            w = bb_lst[0][2]
+            h = bb_lst[0][3]
+            cl = cls_lst[0]
+            cnf = conf_lst[0]   
             drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
-         """
+        
               
 
 if __name__ == '__main__':
