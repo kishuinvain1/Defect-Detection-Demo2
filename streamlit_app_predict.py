@@ -12,7 +12,7 @@ from ultralytics import YOLO
 
 @st.cache_resource(ttl=86400)
 def load_model():
-    model = YOLO('./best.pt')
+    model = YOLO('best.pt')
     return model
 
 
