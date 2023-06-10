@@ -12,8 +12,7 @@ from ultralytics import YOLO
 
 @st.cache_resource(ttl=86400)
 def load_model():
-    model_pth = "best.pt"
-    model = YOLO(model_pth)
+    model = YOLO('best.pt')
     return model
 
 
