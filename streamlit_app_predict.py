@@ -12,7 +12,7 @@ from ultralytics import YOLO
 
 @st.cache_resource(ttl=86400)
 def load_model():
-    model = YOLO('best2.pt')
+    model = YOLO('https://github.com/kishuinvain1/Defect-Detection-Demo2/blob/main/best2.pt')
     return model
 
 
