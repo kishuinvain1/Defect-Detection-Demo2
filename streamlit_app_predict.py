@@ -12,7 +12,7 @@ from ultralytics import YOLO
 
 @st.cache_resource(ttl=86400)
 def load_model():
-    model_pth = "./rubberpart-checking-colab-train/model-data=rf5.v2-yolov8x/best.pt"
+    model_pth = "best.pt"
     model = YOLO(model_pth)
     return model
 
